@@ -15,7 +15,7 @@ class MSSQLAction(Action):
 
     def _connect_params(self, database=None, server=None, user=None, password=None):
         database = database or self.config.get('default')
-        db_config = self.config.get(database, {})
+        db_config = self.config['connections'].get(database, {})
         params = {
             'database': db_config.get('database') or database,
             'server': server or db_config.get('server'),
@@ -24,5 +24,5 @@ class MSSQLAction(Action):
         }
         unspecified = [param for param, value in params.iteritems() if value is None]
         if unspecified:
-            raise Exception("Must specify or configure in config.yaml: %s" % ', '.join(unspecified))
+            raise Exception("Must specify or configure in mssql.yaml: %s" % ', '.join(unspecified))
         return params

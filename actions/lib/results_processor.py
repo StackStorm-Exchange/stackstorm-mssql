@@ -47,7 +47,7 @@ class ResultsProcessor(object):
         Writes results to CSV for downstream processing. Each result set is written to its own file.
         Returns a list of all file names in order of result set for use by downstream actions.
 
-        Checks `output_csv` section in `config.yaml` to determine where to write CSV files. You can
+        Checks `output_csv` section in `mssql.yaml` to determine where to write CSV files. You can
         specify the output `directory` as well as the file `prefix` and `suffix`.
 
         Tries writing to `$TMPDIR`, `$TEMP`, and `$TMP` in order before falling back to platform-

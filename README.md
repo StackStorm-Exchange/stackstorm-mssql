@@ -11,35 +11,46 @@ the server where StackStorm actionrunners run. For example, in Ubuntu, you'd run
 
     sudo apt-get install freetds-dev
 
+Copy the example configuration in [mssql.yaml.example](./mssql.yaml.example)
+to `/opt/stackstorm/configs/mssql.yaml` and edit as required (see below).
+
+
 ### Connections
 
-You will need to add at least one connection in `config.yaml`.
+You will need to add at least one connection, like this:
 
-    production:
-      server: "prod-sql"
-      database: "employees"
-      user: "corp-domain\\service-user"
-      password: "service-password"
+```yaml
+---
+connections:
+  production:
+    server: "prod-sql"
+    database: "employees"
+    user: "corp-domain\\service-user"
+    password: "service-password"
+  employees:
+    server: "prod-sql"
+    user: "corp-domain\\service-user"
+    password: "service-password"
+```
 
 Each connection is named. If no `database` name is specified in the config or provided by the action,
-the connection name will be used. The next example also connects to the `employees` database.
-
-    employees:
-      server: "prod-sql"
-      user: "corp-domain\\service-user"
-      password: "service-password"
+the connection name will be used. 
 
 This also allows you to create separate connections to the same database with different credentials.
 
-    finance:
-      server: "prod-sql"
-      database: "employees"
-      user: "corp-domain\\finance-user"
-      password: "top-secret-password"
+```yaml
+  finance:
+    server: "prod-sql"
+    database: "employees"
+    user: "corp-domain\\finance-user"
+    password: "top-secret-password"
+```
 
 Lastly, you can include a default connection so it isn't required by the action.
 
-    default: employees
+```yaml
+default: employees
+```
 
 ### Query Result Cache
 
@@ -106,3 +117,4 @@ Stored procedures are executed using `mssql.execute.query`, with or without incl
 
 Each result set returned by the stored procedure will be written to an independent CSV file.
 The order of the returned CSV file paths match the order of the result sets.
+
