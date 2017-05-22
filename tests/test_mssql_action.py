@@ -60,7 +60,9 @@ class MSSQLActionTestCase(BaseActionTestCase):
 
     def test_connect_manual(self):
         action = self.get_action_instance()
-        action.config = {}
+        action.config = {
+            'connections' : {}
+        }
         expected = {'database': 'db3', 'server': 'mhost1', 'user': 'muser', 'password': 'mpass'}
         self.assertEqual(expected, action._connect_params(
             database='db3',
