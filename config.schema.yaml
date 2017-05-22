@@ -35,19 +35,19 @@ connections:
         required: true
 output_csv:
   description: "Output file parameters"
-    type: "object"
-    required: false
-    additionalProperties: false
-    properties:
-      file_prefix:
-        description: "Filename prefix to use - default mssql-query"
-        type: "string"
-        default: "mssql-query"
-      file_suffix:
-        description: "File suffix to use - default .csv"
-        type: "string"
-        default: ".csv"
-      directory:
-        description: "Directory to use. Will use tempfile if `null`"
-        type: "string"
-        default: null
+  type: "object"
+  required: false
+  additionalProperties: false
+  properties:
+    file_prefix:
+      description: "Filename prefix to use - default mssql-query"
+      type: "string"
+      default: "mssql-query"
+    file_suffix:
+      description: "File suffix to use - default .csv"
+      type: "string"
+      default: ".csv"
+    directory:
+      description: "Directory to use. Will use tempfile if `null`"
+      type: "string"
+      default: null
