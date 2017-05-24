@@ -21,15 +21,17 @@ class MSSQLActionTestCase(BaseActionTestCase):
         action = self.get_action_instance()
         action.config = {
             'default': 'db2',
-            'db1': {
-                'server': 'ahost1',
-                'user': 'auser',
-                'password': 'apass'
-            },
-            'db2': {
-                'server': 'bhost1',
-                'user': 'buser',
-                'password': 'bpass'
+            'connections': {
+                'db1': {
+                    'server': 'ahost1',
+                    'user': 'auser',
+                    'password': 'apass'
+                },
+                'db2': {
+                    'server': 'bhost1',
+                    'user': 'buser',
+                    'password': 'bpass'
+                }
             }
         }
         expected = {'database': 'db2', 'server': 'bhost1', 'user': 'buser', 'password': 'bpass'}
@@ -39,16 +41,18 @@ class MSSQLActionTestCase(BaseActionTestCase):
         action = self.get_action_instance()
         action.config = {
             'default': 'db2',
-            'db1': {
-                'server': 'ahost1',
-                'user': 'auser',
-                'password': 'apass'
-            },
-            'db2': {
-                'database': 'wtdb',
-                'server': 'bhost1',
-                'user': 'buser',
-                'password': 'bpass'
+            'connections': {
+                'db1': {
+                    'server': 'ahost1',
+                    'user': 'auser',
+                    'password': 'apass'
+                },
+                'db2': {
+                    'database': 'wtdb',
+                    'server': 'bhost1',
+                    'user': 'buser',
+                    'password': 'bpass'
+                }
             }
         }
         expected = {'database': 'wtdb', 'server': 'bhost1', 'user': 'buser', 'password': 'bpass'}
@@ -56,7 +60,9 @@ class MSSQLActionTestCase(BaseActionTestCase):
 
     def test_connect_manual(self):
         action = self.get_action_instance()
-        action.config = {}
+        action.config = {
+            'connections': {}
+        }
         expected = {'database': 'db3', 'server': 'mhost1', 'user': 'muser', 'password': 'mpass'}
         self.assertEqual(expected, action._connect_params(
             database='db3',
@@ -68,15 +74,17 @@ class MSSQLActionTestCase(BaseActionTestCase):
     def test_connect_manual_database(self):
         action = self.get_action_instance()
         action.config = {
-            'db1': {
-                'server': 'ahost1',
-                'user': 'auser',
-                'password': 'apass'
-            },
-            'db2': {
-                'server': 'bhost1',
-                'user': 'buser',
-                'password': 'bpass'
+            'connections': {
+                'db1': {
+                    'server': 'ahost1',
+                    'user': 'auser',
+                    'password': 'apass'
+                },
+                'db2': {
+                    'server': 'bhost1',
+                    'user': 'buser',
+                    'password': 'bpass'
+                }
             }
         }
         expected = {'database': 'db1', 'server': 'ahost1', 'user': 'auser', 'password': 'apass'}
@@ -86,15 +94,17 @@ class MSSQLActionTestCase(BaseActionTestCase):
         action = self.get_action_instance()
         action.config = {
             'default': 'db2',
-            'db1': {
-                'server': 'ahost1',
-                'user': 'auser',
-                'password': 'apass'
-            },
-            'db2': {
-                'server': 'bhost1',
-                'user': 'buser',
-                'password': 'bpass'
+            'connections': {
+                'db1': {
+                    'server': 'ahost1',
+                    'user': 'auser',
+                    'password': 'apass'
+                },
+                'db2': {
+                    'server': 'bhost1',
+                    'user': 'buser',
+                    'password': 'bpass'
+                }
             }
         }
         expected = {'database': 'db1', 'server': 'mhost1', 'user': 'muser', 'password': 'apass'}
@@ -108,8 +118,10 @@ class MSSQLActionTestCase(BaseActionTestCase):
         action = self.get_action_instance()
         action.config = {
             'default': 'unknown-db',
-            'db1': {
-                'server': 'ahost1'
+            'connections': {
+                'db1': {
+                    'server': 'ahost1'
+                }
             }
         }
         self.assertRaises(Exception, action._connect_params)
@@ -117,10 +129,12 @@ class MSSQLActionTestCase(BaseActionTestCase):
     def test_connect_missing_database(self):
         action = self.get_action_instance()
         action.config = {
-            'db1': {
-                'server': 'ahost1',
-                'user': 'auser',
-                'password': 'apass'
+            'connections': {
+                'db1': {
+                    'server': 'ahost1',
+                    'user': 'auser',
+                    'password': 'apass'
+                }
             }
         }
         self.assertRaises(Exception, action._connect_params)
@@ -129,9 +143,11 @@ class MSSQLActionTestCase(BaseActionTestCase):
         action = self.get_action_instance()
         action.config = {
             'default': 'db1',
-            'db1': {
-                'user': 'auser',
-                'password': 'apass'
+            'connections': {
+                'db1': {
+                    'user': 'auser',
+                    'password': 'apass'
+                }
             }
         }
         self.assertRaises(Exception, action._connect_params)
@@ -140,9 +156,11 @@ class MSSQLActionTestCase(BaseActionTestCase):
         action = self.get_action_instance()
         action.config = {
             'default': 'db1',
-            'db1': {
-                'server': 'ahost1',
-                'password': 'apass'
+            'connections': {
+                'db1': {
+                    'server': 'ahost1',
+                    'password': 'apass'
+                }
             }
         }
         self.assertRaises(Exception, action._connect_params)
@@ -151,9 +169,11 @@ class MSSQLActionTestCase(BaseActionTestCase):
         action = self.get_action_instance()
         action.config = {
             'default': 'db1',
-            'db1': {
-                'server': 'ahost1',
-                'user': 'auser'
+            'connections': {
+                'db1': {
+                    'server': 'ahost1',
+                    'user': 'auser'
+                }
             }
         }
         self.assertRaises(Exception, action._connect_params)
