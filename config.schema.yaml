@@ -18,6 +18,12 @@ connections:
         type: "string"
         secret: false
         required: true
+      port:
+        description: "Database Port - defaults to 1433"
+        type: "string"
+        secret: false
+        required: false
+        default: "1433"
       database:
         description: "Database name - connection name used if not set"
         type: "string"

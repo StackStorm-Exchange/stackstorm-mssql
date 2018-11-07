@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0
+
+- Added optional `port` parameter to connections
+
 ## 0.2.0
 
 - Rename `config.yaml` to `config.schema.yaml` and update to use schema.

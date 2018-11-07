@@ -8,6 +8,7 @@ connections:
     password: "service-password"
   finance:
     server: "prod-sql"
+    server: "1450"
     database: "employees"
     user: "corp-domain\\finance-user"
     password: "top-secret-password"

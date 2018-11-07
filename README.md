@@ -29,12 +29,13 @@ connections:
     password: "service-password"
   employees:
     server: "prod-sql"
+    port: "1450"
     user: "corp-domain\\service-user"
     password: "service-password"
 ```
 
 Each connection is named. If no `database` name is specified in the config or provided by the action,
-the connection name will be used. 
+the connection name will be used. Configuring a `port` is optional. If not specified, 1433 will be used.
 
 This also allows you to create separate connections to the same database with different credentials.
 
