@@ -24,17 +24,20 @@ class MSSQLActionTestCase(BaseActionTestCase):
             'connections': {
                 'db1': {
                     'server': 'ahost1',
+                    'port': '1433',
                     'user': 'auser',
                     'password': 'apass'
                 },
                 'db2': {
                     'server': 'bhost1',
+                    'port': '1450',
                     'user': 'buser',
                     'password': 'bpass'
                 }
             }
         }
-        expected = {'database': 'db2', 'server': 'bhost1', 'user': 'buser', 'password': 'bpass'}
+        expected = {'database': 'db2', 'server': 'bhost1', 'port': '1450',
+                    'user': 'buser', 'password': 'bpass'}
         self.assertEqual(expected, action._connect_params())
 
     def test_connect_config_database(self):
@@ -44,18 +47,21 @@ class MSSQLActionTestCase(BaseActionTestCase):
             'connections': {
                 'db1': {
                     'server': 'ahost1',
+                    'port': '1433',
                     'user': 'auser',
                     'password': 'apass'
                 },
                 'db2': {
                     'database': 'wtdb',
                     'server': 'bhost1',
+                    'port': '1433',
                     'user': 'buser',
                     'password': 'bpass'
                 }
             }
         }
-        expected = {'database': 'wtdb', 'server': 'bhost1', 'user': 'buser', 'password': 'bpass'}
+        expected = {'database': 'wtdb', 'server': 'bhost1', 'port': '1433',
+                    'user': 'buser', 'password': 'bpass'}
         self.assertEqual(expected, action._connect_params())
 
     def test_connect_manual(self):
@@ -63,10 +69,12 @@ class MSSQLActionTestCase(BaseActionTestCase):
         action.config = {
             'connections': {}
         }
-        expected = {'database': 'db3', 'server': 'mhost1', 'user': 'muser', 'password': 'mpass'}
+        expected = {'database': 'db3', 'server': 'mhost1', 'port': '1433',
+                    'user': 'muser', 'password': 'mpass'}
         self.assertEqual(expected, action._connect_params(
             database='db3',
             server='mhost1',
+            port='1433',
             user='muser',
             password='mpass'
         ))
@@ -77,17 +85,20 @@ class MSSQLActionTestCase(BaseActionTestCase):
             'connections': {
                 'db1': {
                     'server': 'ahost1',
+                    'port': '1433',
                     'user': 'auser',
                     'password': 'apass'
                 },
                 'db2': {
                     'server': 'bhost1',
+                    'port': '1433',
                     'user': 'buser',
                     'password': 'bpass'
                 }
             }
         }
-        expected = {'database': 'db1', 'server': 'ahost1', 'user': 'auser', 'password': 'apass'}
+        expected = {'database': 'db1', 'server': 'ahost1', 'port': '1433',
+                    'user': 'auser', 'password': 'apass'}
         self.assertEqual(expected, action._connect_params(database='db1'))
 
     def test_connect_override(self):
@@ -97,17 +108,20 @@ class MSSQLActionTestCase(BaseActionTestCase):
             'connections': {
                 'db1': {
                     'server': 'ahost1',
+                    'port': '1433',
                     'user': 'auser',
                     'password': 'apass'
                 },
                 'db2': {
                     'server': 'bhost1',
+                    'port': '1433',
                     'user': 'buser',
                     'password': 'bpass'
                 }
             }
         }
-        expected = {'database': 'db1', 'server': 'mhost1', 'user': 'muser', 'password': 'apass'}
+        expected = {'database': 'db1', 'server': 'mhost1', 'port': '1433',
+                    'user': 'muser', 'password': 'apass'}
         self.assertEqual(expected, action._connect_params(
             database='db1',
             server='mhost1',
@@ -120,7 +134,8 @@ class MSSQLActionTestCase(BaseActionTestCase):
             'default': 'unknown-db',
             'connections': {
                 'db1': {
-                    'server': 'ahost1'
+                    'server': 'ahost1',
+                    'port': '1433'
                 }
             }
         }
@@ -133,7 +148,8 @@ class MSSQLActionTestCase(BaseActionTestCase):
                 'db1': {
                     'server': 'ahost1',
                     'user': 'auser',
-                    'password': 'apass'
+                    'password': 'apass',
+                    'port': '1433'
                 }
             }
         }
@@ -145,6 +161,7 @@ class MSSQLActionTestCase(BaseActionTestCase):
             'default': 'db1',
             'connections': {
                 'db1': {
+                    'port': '1433',
                     'user': 'auser',
                     'password': 'apass'
                 }
@@ -159,7 +176,8 @@ class MSSQLActionTestCase(BaseActionTestCase):
             'connections': {
                 'db1': {
                     'server': 'ahost1',
-                    'password': 'apass'
+                    'password': 'apass',
+                    'port': '1433'
                 }
             }
         }
@@ -172,7 +190,8 @@ class MSSQLActionTestCase(BaseActionTestCase):
             'connections': {
                 'db1': {
                     'server': 'ahost1',
-                    'user': 'auser'
+                    'user': 'auser',
+                    'port': '1433'
                 }
             }
         }

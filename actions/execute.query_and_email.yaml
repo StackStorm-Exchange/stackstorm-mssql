@@ -20,6 +20,9 @@ parameters:
   server:
     description: "Database host if not specified in config"
     type: string
+  port:
+    description: Database port if not specified in config.
+    type: string
   user:
     description: "Database user if not specified in config"
     type: string
