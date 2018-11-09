@@ -16,7 +16,7 @@ class MSSQLRunner(MSSQLAction):
     # Pack actions map to a pair of methods: PyMSSQL (_mssql) driver and ResultsProcessor handler
     ACTION_MAPPING = {
         'execute_insert': ('execute_non_query', 'execute_insert')
-                          # default: (action_name, action_name)
+        # default: (action_name, action_name)
     }
 
     def __init__(self, config):
