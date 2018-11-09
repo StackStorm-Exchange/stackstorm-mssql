@@ -15,7 +15,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-dependency-cache-{{ checksum "requirements.txt" }}
+          key: v2-dependency-cache-{{ checksum "requirements.txt" }}
       - run:
           name: Download dependencies
           command: |
@@ -25,7 +25,7 @@ jobs:
           name: Run tests
           command: ~/ci/.circle/test
       - save_cache:
-          key: v1-dependency-cache-{{ checksum "requirements.txt" }}
+          key: v2-dependency-cache-{{ checksum "requirements.txt" }}
           paths:
             - ~/.cache/pip
             - ~/.apt-cache
@@ -50,7 +50,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-dependency-cache-{{ checksum "requirements.txt" }}
+          key: v2-dependency-cache-{{ checksum "requirements.txt" }}
       - attach_workspace:
           at: /
       - run:
