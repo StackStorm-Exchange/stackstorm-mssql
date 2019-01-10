@@ -1,3 +1,4 @@
+import six
 import _mssql
 from tempfile import NamedTemporaryFile
 import csv
@@ -79,7 +80,7 @@ class ResultsProcessor(object):
 
     def _filter_numbered_columns(self, row):
         """only return columns by name, not column number"""
-        return {k: v for k, v in row.iteritems() if not isinstance(k, (int, long))}
+        return {k: v for k, v in row.iteritems() if not isinstance(k, six.integer_types)}
 
     def _get_output_file(self, prefix='mssql-query.', suffix='.csv'):
         output_config = self.config.get('output_csv', {})
