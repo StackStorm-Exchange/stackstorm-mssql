@@ -1,3 +1,4 @@
+import six
 import _mssql
 
 from st2common.runners.base_action import Action
@@ -22,7 +23,7 @@ class MSSQLAction(Action):
             'user': user or db_config.get('user'),
             'password': password or db_config.get('password')
         }
-        unspecified = [param for param, value in params.iteritems() if value is None]
+        unspecified = [param for param, value in six.iteritems(params) if value is None]
         if unspecified:
             raise Exception("Must specify or configure in mssql.yaml: %s" % ', '.join(unspecified))
         return params
