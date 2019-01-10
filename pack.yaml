@@ -9,5 +9,8 @@ keywords:
   - sql server
   - database
 version: 0.2.1
+python_versions:
+  - "2"
+  - "3"
 author: codyaray
 email: talktome@codyaray.com
