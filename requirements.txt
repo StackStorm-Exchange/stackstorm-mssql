@@ -1,1 +1,1 @@
-pymssql
+pymssql<3.0
