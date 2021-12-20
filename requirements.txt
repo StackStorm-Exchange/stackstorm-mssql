@@ -1,1 +1,2 @@
-pymssql<3.0
+# 2.2 converts pymysql to a package, so can't import _mssql directly
+pymssql<2.2
